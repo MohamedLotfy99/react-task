@@ -12,25 +12,50 @@ const Speed = ({ setSpeed }: SpeedProps) => {
     setSpeed(speed); // Call the setSpeed function
   };
 
+  // Create the dots in a 2x3 table layout (2 columns, 3 rows)
+  const renderDots = (speed: number) => {
+    const dots = [];
+    for (let i = 0; i < 3; i++) {
+      // 3 rows
+      dots.push(
+        <div key={i} className="flex">
+          {/* 2 columns in each row */}
+          <div
+            className={`w-1 h-1 mt-0.5 mx-0.5 ${
+              selectedSpeed === speed ? "bg-yellow-500" : "bg-black"
+            }`}
+          ></div>
+          <div
+            className={`w-1 h-1 mt-0.5 mx-0  ${
+              selectedSpeed === speed ? "bg-yellow-500" : "bg-black"
+            }`}
+          ></div>
+        </div>
+      );
+    }
+    return dots;
+  };
+
   return (
-    <div className="w-fit border-9 border-gray-800 mt-4 ">
-      <div className="flex flex-col items-center w-max">
+    <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2">
+      <div className="flex flex-col items-center w-fit">
         {[0.5, 1, 2].map((speed) => (
           <button
             key={speed}
             onClick={() => handleClick(speed)}
-            className={`relative px-6 py-2 w-full transition-all duration-200 ${
+            className={`flex items-center px-6 py-2 w-full transition-all duration-200  ${
               selectedSpeed === speed
-                ? "bg-gray-500 opacity-100 text-white"
-                : "bg-gray-500 opacity-70 text-white"
+                ? "opacity-100 bg-gray-500 text-white"
+                : "opacity-60 bg-gray-500 text-white"
             }`}
           >
-            <span
-              className={`absolute top-0 right-0 h-full rounded-l-md ${
-                selectedSpeed === speed ? "bg-yellow-500 w-2" : "w-0"
-              }`}
-            ></span>
-            {speed}x
+            {/* Speed Text */}
+            <span className="mr-4">{speed}x</span>
+
+            {/* Dot Table aligned to the right and in a 2x3 grid layout */}
+            <div className="flex flex-col items-end ml-auto">
+              {renderDots(speed)}
+            </div>
           </button>
         ))}
       </div>
