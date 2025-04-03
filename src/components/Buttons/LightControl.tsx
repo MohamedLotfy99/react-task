@@ -37,7 +37,7 @@ const LightControl = ({ setLightMode }: LightControlProps) => {
   };
 
   return (
-    <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2">
+    <div className="w-fit border-8 border-gray-900 mr-4 rounded-e-md mt-2">
       <div className="flex flex-col items-center w-fit">
         {["Light", "Spot Light", "Laser"].map((lightMode) => (
           <button

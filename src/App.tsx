@@ -9,6 +9,11 @@ import DriveControl from "./components/Buttons/DriveControl.tsx";
 import LightControl from "./components/Buttons/LightControl.tsx";
 import MapControl from "./components/Buttons/MapControl.tsx";
 import Speed from "./components/HUD/Speed.tsx";
+import MenuAlert from "./components/Alerts/MenuAlert.tsx";
+import MenuButton from "./components/Buttons/MenuButton.tsx";
+import StopButton from "./components/Buttons/StopButton.tsx";
+import StopAlert from "./components/Alerts/StopAlert.tsx";
+
 interface Location {
   x: number; // X coordinate
   y: number; // Y coordinate
@@ -20,6 +25,9 @@ const App = () => {
   const [light, setLightMode] = useState("Laser");
   const [battery] = useState(89);
   const [location, setLocation] = useState<Location>({ x: 0, y: 0 });
+
+  const [menuAlertVis, setMenuAlertVis] = useState(false);
+  const [stopAlertVis, setStopAlertVis] = useState(false);
 
   return (
     <div className="w-screen min-h-screen">
@@ -35,6 +43,21 @@ const App = () => {
         mapMode={mapMode}
       />
       {/* <CameraFeed /> */}
+      <div className="ml-4 flex justify-between">
+        <MenuButton onClick={() => setMenuAlertVis(true)}>Menu</MenuButton>
+        {menuAlertVis && (
+          <MenuAlert onClose={() => setMenuAlertVis(false)}>
+            Menu Screen
+          </MenuAlert>
+        )}
+
+        {stopAlertVis && (
+          <StopAlert onClose={() => setStopAlertVis(false)}>
+            EMERGENCY STOP
+          </StopAlert>
+        )}
+        <StopButton onClick={() => setStopAlertVis(true)}>STOP</StopButton>
+      </div>
       <div className="flex ml-4 space-x-4 justify-between">
         <DriveControl setDriveMode={setDriveMode}></DriveControl>
         <LightControl setLightMode={setLightMode}></LightControl>

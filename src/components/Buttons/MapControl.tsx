@@ -42,13 +42,13 @@ const MapControl = ({ setMapMode }: MapControlProps) => {
   };
 
   return (
-    <div className="w-fit h-full border-6 border-gray-900 rounded-bl-sm mt-2">
+    <div className="w-fit h-full border-8 border-gray-900 rounded-md mt-2">
       <div className="flex flex-row items-stretch text-s">
         {["3D Map", "Camera", "2D Map"].map((mapMode) => (
           <button
             key={mapMode}
             onClick={() => handleClick(mapMode)}
-            className={`flex flex-col items-center w-36 transition-all border-2 border-black duration-200 ${
+            className={`flex flex-col items-center px-6 py-2 w-40 transition-all duration-200 ${
               selectedMapMode === mapMode
                 ? "opacity-100 bg-gray-500 text-white"
                 : "opacity-60 bg-gray-500 text-white"
