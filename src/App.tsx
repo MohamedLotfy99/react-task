@@ -1,23 +1,24 @@
 import { useState } from "react";
 import Hud from "./components/Hud";
-import Controls from "./components/Controls";
 import Joystick from "./components/Joystick";
-import CameraFeed from "./components/CameraFeed.tsx";
+// import CameraFeed from "./components/CameraFeed.tsx";
 import Bar from "./components/HUD/Bar";
 import "./App.css";
+import SpeedControl from "./components/Buttons/SpeedControl.tsx";
+import DriveControl from "./components/Buttons/DriveControl.tsx";
+import LightControl from "./components/Buttons/LightControl.tsx";
+import MapControl from "./components/Buttons/MapControl.tsx";
 import Speed from "./components/HUD/Speed.tsx";
-import DriveControl from "./components/HUD/DriveControl.tsx";
-
 interface Location {
   x: number; // X coordinate
   y: number; // Y coordinate
 }
 const App = () => {
-  const [speed, setSpeed] = useState(0.5);
+  const [speed, setSpeed] = useState(1);
   const [driveMode, setDriveMode] = useState("Manual");
   const [mapMode, setMapMode] = useState("Camera");
-  const [light, setLightMode] = useState("Light");
-  const [battery] = useState(85);
+  const [light, setLightMode] = useState("Laser");
+  const [battery] = useState(89);
   const [location, setLocation] = useState<Location>({ x: 0, y: 0 });
 
   return (
@@ -33,16 +34,22 @@ const App = () => {
         light={light}
         mapMode={mapMode}
       />
-      <CameraFeed />
-      <Speed setSpeed={setSpeed} />
-      <DriveControl setDriveMode={setDriveMode}></DriveControl>
-      <Controls
-        setMapMode={setMapMode}
-        setSpeed={setSpeed}
-        setDriveMode={setDriveMode}
-        setLighting={setLightMode}
-      />
-      <Joystick location={location} setLocation={setLocation} />
+      {/* <CameraFeed /> */}
+      <div className="flex ml-4 space-x-4 justify-between">
+        <DriveControl setDriveMode={setDriveMode}></DriveControl>
+        <LightControl setLightMode={setLightMode}></LightControl>
+      </div>
+      <div className="flex ml-4 space-x-4 justify-between">
+        <SpeedControl setSpeed={setSpeed} />
+      </div>
+      <div className="flex ml-30 mr-30  justify-between items-center mt-60">
+        <Joystick location={location} setLocation={setLocation} />
+        <Speed speed={speed}></Speed>
+        <Joystick location={location} setLocation={setLocation} />
+      </div>
+      <div className="flex items-center justify-center">
+        <MapControl setMapMode={setMapMode}></MapControl>
+      </div>
     </div>
   );
 };

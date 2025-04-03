@@ -1,19 +1,19 @@
 import { useState } from "react";
 
-interface DriveControlProps {
-  setDriveMode: (driveMode: string) => void; // Function to set speed
+interface LightControlProps {
+  setLightMode: (lightMode: string) => void; // Function to set speed
 }
 
-const DriveControl = ({ setDriveMode }: DriveControlProps) => {
-  const [selectedDriveMode, setSelectedDriveMode] = useState("Auto");
+const LightControl = ({ setLightMode }: LightControlProps) => {
+  const [selectedLightMode, setSelectedLightMode] = useState("Laser");
 
-  const handleClick = (drivemode: string) => {
-    setSelectedDriveMode(drivemode); // Update selected button
-    setDriveMode(drivemode); // Call the setSpeed function
+  const handleClick = (lightMode: string) => {
+    setSelectedLightMode(lightMode); // Update selected button
+    setLightMode(lightMode); // Call the setSpeed function
   };
 
   // Create the dots in a 2x3 table layout (2 columns, 3 rows)
-  const renderDots = (drivemode: string) => {
+  const renderDots = (lightMode: string) => {
     const dots = [];
     for (let i = 0; i < 3; i++) {
       // 3 rows
@@ -22,12 +22,12 @@ const DriveControl = ({ setDriveMode }: DriveControlProps) => {
           {/* 2 columns in each row */}
           <div
             className={`w-1 h-1 mt-0.5 mx-0.5 ${
-              selectedDriveMode === drivemode ? "bg-yellow-500" : "bg-black"
+              selectedLightMode === lightMode ? "bg-yellow-500" : "bg-black"
             }`}
           ></div>
           <div
             className={`w-1 h-1 mt-0.5 mx-0  ${
-              selectedDriveMode === drivemode ? "bg-yellow-500" : "bg-black"
+              selectedLightMode === lightMode ? "bg-yellow-500" : "bg-black"
             }`}
           ></div>
         </div>
@@ -39,23 +39,22 @@ const DriveControl = ({ setDriveMode }: DriveControlProps) => {
   return (
     <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2">
       <div className="flex flex-col items-center w-fit">
-        {["Auto", "Semi-Auto", "Manual"].map((driveMode) => (
+        {["Light", "Spot Light", "Laser"].map((lightMode) => (
           <button
-            key={driveMode}
-            onClick={() => handleClick(driveMode)}
+            key={lightMode}
+            onClick={() => handleClick(lightMode)}
             className={`flex items-center px-6 py-2 w-full transition-all duration-200  ${
-              selectedDriveMode === driveMode
+              selectedLightMode === lightMode
                 ? "opacity-100 bg-gray-500 text-white"
                 : "opacity-60 bg-gray-500 text-white"
             }`}
           >
-            {/* Speed Text */}
-            <span className="mr-4">{driveMode}</span>
-
             {/* Dot Table aligned to the right and in a 2x3 grid layout */}
-            <div className="flex flex-col items-end ml-auto">
-              {renderDots(driveMode)}
+            <div className="flex flex-col items-start mr-4">
+              {renderDots(lightMode)}
             </div>
+            {/* Speed Text */}
+            <span className="mr-4">{lightMode}</span>
           </button>
         ))}
       </div>
@@ -63,4 +62,4 @@ const DriveControl = ({ setDriveMode }: DriveControlProps) => {
   );
 };
 
-export default DriveControl;
+export default LightControl;
