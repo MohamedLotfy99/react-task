@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Hud from "./components/Hud";
-import Joystick from "./components/Joystick";
+import Joystick from "./components/HUD/Joystick.tsx";
 // import CameraFeed from "./components/CameraFeed.tsx";
 import Bar from "./components/HUD/Bar";
 import "./App.css";
@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <div className="w-screen min-h-screen">
-      <Bar>
+      <Bar battery={battery}>
         <img src="src/assets/atom.png" className="h-12 w-auto"></img>
       </Bar>
       <Hud
@@ -65,7 +65,7 @@ const App = () => {
       <div className="flex ml-4 space-x-4 justify-between">
         <SpeedControl setSpeed={setSpeed} />
       </div>
-      <div className="flex ml-30 mr-30  justify-between items-center mt-60">
+      <div className="flex ml-30 mr-30  justify-between items-center mt-10">
         <Joystick location={location} setLocation={setLocation} />
         <Speed speed={speed}></Speed>
         <Joystick location={location} setLocation={setLocation} />
