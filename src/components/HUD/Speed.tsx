@@ -2,11 +2,10 @@ import { useState } from "react";
 
 interface SpeedProps {
   setSpeed: (speed: number) => void; // Function to set speed
-  color?: string;
 }
 
-const Speed = ({ setSpeed, color = "primary" }: SpeedProps) => {
-  const [selectedSpeed, setSelectedSpeed] = useState<number | null>(null);
+const Speed = ({ setSpeed }: SpeedProps) => {
+  const [selectedSpeed, setSelectedSpeed] = useState(-1);
 
   const handleClick = (speed: number) => {
     setSelectedSpeed(speed); // Update selected button
@@ -14,20 +13,23 @@ const Speed = ({ setSpeed, color = "primary" }: SpeedProps) => {
   };
 
   return (
-    <div className="w-fit bg-gray-700 p-4 rounded-lg space-y-4 shadow-md mt-4">
-      <h2 className="text-lg font-bold text-white">Speed</h2>
-
-      <div className="flex flex-col items-center space-y-2">
+    <div className="w-fit border-9 border-gray-800 mt-4 ">
+      <div className="flex flex-col items-center w-max">
         {[0.5, 1, 2].map((speed) => (
           <button
             key={speed}
             onClick={() => handleClick(speed)}
-            className={`px-6 py-2 rounded w-full transition-all duration-200 ${
+            className={`relative px-6 py-2 w-full transition-all duration-200 ${
               selectedSpeed === speed
-                ? "btn btn-primary text-white"
-                : "btn btn-success text-white"
+                ? "bg-gray-500 opacity-100 text-white"
+                : "bg-gray-500 opacity-70 text-white"
             }`}
           >
+            <span
+              className={`absolute top-0 right-0 h-full rounded-l-md ${
+                selectedSpeed === speed ? "bg-yellow-500 w-2" : "w-0"
+              }`}
+            ></span>
             {speed}x
           </button>
         ))}
