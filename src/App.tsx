@@ -6,6 +6,7 @@ import CameraFeed from "./components/CameraFeed.tsx";
 import Bar from "./components/HUD/Bar";
 import "./App.css";
 import Speed from "./components/HUD/Speed.tsx";
+import DriveControl from "./components/HUD/DriveControl.tsx";
 
 interface Location {
   x: number; // X coordinate
@@ -34,6 +35,7 @@ const App = () => {
       />
       <CameraFeed />
       <Speed setSpeed={setSpeed} />
+      <DriveControl setDriveMode={setDriveMode}></DriveControl>
       <Controls
         setMapMode={setMapMode}
         setSpeed={setSpeed}
