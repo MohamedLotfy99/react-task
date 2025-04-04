@@ -1,30 +1,37 @@
 interface HudProps {
-  speed: number; // Speed in m/s
-  battery: number; // Battery percentage
-  location: { x: number; y: number }; // Location coordinates
   driveMode: string; // Drive mode (e.g., Manual, Autonomous)
   light: string; // Light mode (e.g., Light, Spot Light, Laser)
   mapMode: string; // Map mode (e.g., Camera, Map)
 }
-const Hud = ({
-  speed,
-  battery,
-  location,
-  driveMode,
-  light,
-  mapMode,
-}: HudProps) => {
+const Hud = ({ driveMode, light, mapMode }: HudProps) => {
   return (
-    <div className="w-full bg-gray-800 p-4 rounded-lg shadow-md text-center">
-      <p className="text-lg font-bold">Robot HUD</p>
-      <p>Speed: {speed} m/s</p>
-      <p>Battery: {battery}%</p>
-      <p>Drive Mode: {driveMode}</p>
-      <p>Lightning: {light}</p>
-      <p>Map Mode: {mapMode}</p>
-      <p>
-        Location: ({location.x}, {location.y})
-      </p>
+    <div
+      className=" text-center flex flex-row justify-center gap-25 absolute left-1/2 transform -translate-x-1/2"
+      style={{ width: "600px" }} // Adjust width as needed
+    >
+      <div className="flex flex-col items-center">
+        <img
+          style={{ width: "100px", height: "100px" }}
+          src="src/assets/driveMode.png"
+        />
+        <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1">{driveMode}</p>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img
+          style={{ width: "100px", height: "100px" }}
+          src="src/assets/mapMode.png"
+        />
+        <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1 ">{mapMode}</p>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img
+          style={{ width: "100px", height: "100px" }}
+          src="src/assets/lightMode.png"
+        />
+        <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1">{light}</p>
+      </div>
     </div>
   );
 };

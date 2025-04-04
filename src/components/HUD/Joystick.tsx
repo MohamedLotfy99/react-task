@@ -1,22 +1,52 @@
 import { useState, useRef } from "react";
 
-interface JoystickProps {
-  location: { x: number; y: number };
-  setLocation: (
-    location:
-      | { x: number; y: number }
-      | ((prev: { x: number; y: number }) => { x: number; y: number })
-  ) => void;
+interface Location {
+  x: number;
+  y: number;
+  absX: number;
+  absY: number;
 }
 
-const Joystick = ({ setLocation }: JoystickProps) => {
+interface JoystickProps {
+  location: Location;
+  setLocation: (location: Location | ((prev: Location) => Location)) => void;
+  setLocationDMS: (locationDMS: { x: string; y: string }) => void;
+
+  distance: number;
+  setDistance: (distance: number) => void;
+}
+
+// Helper function to convert decimal degrees to DMS (Degrees, Minutes, Seconds)
+const convertToDMS = (decimal: number, isLatitude: boolean) => {
+  const degrees = Math.floor(decimal);
+  const minutes = Math.floor((decimal - degrees) * 60);
+  const seconds = ((decimal - degrees) * 60 - minutes) * 60;
+
+  let direction = "";
+  if (isLatitude) {
+    direction = degrees >= 0 ? "N" : "S";
+  } else {
+    direction = degrees >= 0 ? "E" : "W";
+  }
+
+  // Convert to string format
+  return `${Math.abs(degrees)}° ${Math.abs(minutes)}' ${Math.abs(
+    parseFloat(seconds.toFixed(2))
+  )}" ${direction}`;
+};
+
+const Joystick = ({
+  setLocation,
+  setDistance,
+  setLocationDMS,
+}: JoystickProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const joystickRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const movementInterval = useRef<NodeJS.Timeout | null>(null);
   const directionRef = useRef({ x: 0, y: 0 }); // Track movement direction
 
-  const maxRadius = 40; // Joystick UI movement limit
+  const maxRadius = 45; // Joystick UI movement limit
   const movementSpeed = 0.5; // How fast location updates
 
   // Start continuous movement
@@ -29,10 +59,28 @@ const Joystick = ({ setLocation }: JoystickProps) => {
 
     // Start updating location continuously
     movementInterval.current = setInterval(() => {
-      setLocation((prev: { x: number; y: number }) => ({
-        x: prev.x + directionRef.current.x * movementSpeed,
-        y: prev.y + directionRef.current.y * movementSpeed,
-      }));
+      setLocation((prev) => {
+        const newX = prev.x + directionRef.current.x * movementSpeed;
+        const newY = prev.y + directionRef.current.y * movementSpeed;
+
+        const absX =
+          prev.absX + Math.abs(directionRef.current.x) * movementSpeed;
+        const absY =
+          prev.absY + Math.abs(directionRef.current.y) * movementSpeed;
+        console.log(absX, absY);
+
+        setDistance(Math.sqrt(absX * absX + absY * absY)); // Update distance
+        // Convert latitude (y) and longitude (x) to DMS format
+        const latitudeDMS = convertToDMS(newY, true);
+        const longitudeDMS = convertToDMS(newX, false);
+
+        setLocationDMS({ x: longitudeDMS, y: latitudeDMS });
+        // // Log the DMS values for debugging
+        // console.log(`Latitude: ${latitudeDMS}`);
+        // console.log(`Longitude: ${longitudeDMS}`);
+
+        return { x: newX, y: newY, absX, absY };
+      });
     }, 50);
   };
 
@@ -116,6 +164,7 @@ const Joystick = ({ setLocation }: JoystickProps) => {
 };
 
 export default Joystick;
+
 //Arrows
 // interface JoystickProps {
 //   location: { x: number; y: number };

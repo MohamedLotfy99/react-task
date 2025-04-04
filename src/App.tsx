@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Hud from "./components/Hud";
 import Joystick from "./components/HUD/Joystick.tsx";
-// import CameraFeed from "./components/CameraFeed.tsx";
 import Bar from "./components/HUD/Bar";
 import "./App.css";
 import SpeedControl from "./components/Buttons/SpeedControl.tsx";
@@ -13,49 +11,64 @@ import MenuAlert from "./components/Alerts/MenuAlert.tsx";
 import MenuButton from "./components/Buttons/MenuButton.tsx";
 import StopButton from "./components/Buttons/StopButton.tsx";
 import StopAlert from "./components/Alerts/StopAlert.tsx";
+import Hud from "./components/Hud.tsx";
 
 interface Location {
   x: number; // X coordinate
-  y: number; // Y coordinate
+  y: number;
+  absX: number;
+  absY: number; // Y coordinate
+}
+interface LocationDMS {
+  x: string;
+  y: string;
 }
 const App = () => {
   const [speed, setSpeed] = useState(1);
   const [driveMode, setDriveMode] = useState("Manual");
   const [mapMode, setMapMode] = useState("Camera");
-  const [light, setLightMode] = useState("Laser");
+  const [lightMode, setLightMode] = useState("Laser");
   const [battery] = useState(89);
-  const [location, setLocation] = useState<Location>({ x: 0, y: 0 });
+  const [location, setLocation] = useState<Location>({
+    x: 0,
+    y: 0,
+    absX: 0,
+    absY: 0,
+  });
+  const [distance, setDistance] = useState(0);
+  const [locationDMS, setLocationDMS] = useState<LocationDMS>({
+    x: "0° 0' 0'' N",
+    y: "0° 0' 0'' E",
+  });
 
   const [menuAlertVis, setMenuAlertVis] = useState(false);
   const [stopAlertVis, setStopAlertVis] = useState(false);
 
   return (
     <div className="w-screen min-h-screen">
-      <Bar battery={battery}>
-        <img src="src/assets/atom.png" className="h-12 w-auto"></img>
-      </Bar>
-      <Hud
-        speed={speed}
+      <Bar
         battery={battery}
-        location={location}
-        driveMode={driveMode}
-        light={light}
-        mapMode={mapMode}
-      />
-      {/* <CameraFeed /> */}
-      <div className="ml-4 flex justify-between">
-        <MenuButton onClick={() => setMenuAlertVis(true)}>Menu</MenuButton>
-        {menuAlertVis && (
-          <MenuAlert onClose={() => setMenuAlertVis(false)}>
-            Menu Screen
-          </MenuAlert>
-        )}
-
+        locationDMS={locationDMS}
+        distance={distance}
+      ></Bar>
+      <div className="mt-50 z-10 absolute top-25 left-1/2 transform -translate-x-1/2">
         {stopAlertVis && (
           <StopAlert onClose={() => setStopAlertVis(false)}>
             EMERGENCY STOP
           </StopAlert>
         )}
+        {menuAlertVis && (
+          <MenuAlert onClose={() => setMenuAlertVis(false)}>
+            Menu Screen
+          </MenuAlert>
+        )}
+      </div>
+      <div className="mt-40">
+        <Hud driveMode={driveMode} mapMode={mapMode} light={lightMode}></Hud>
+      </div>
+      <div className="ml-4 mt-10 flex justify-between">
+        <MenuButton onClick={() => setMenuAlertVis(true)}>Menu</MenuButton>
+
         <StopButton onClick={() => setStopAlertVis(true)}>STOP</StopButton>
       </div>
       <div className="flex ml-4 space-x-4 justify-between">
@@ -66,9 +79,21 @@ const App = () => {
         <SpeedControl setSpeed={setSpeed} />
       </div>
       <div className="flex ml-30 mr-30  justify-between items-center mt-10">
-        <Joystick location={location} setLocation={setLocation} />
+        <Joystick
+          distance={distance}
+          location={location}
+          setLocationDMS={setLocationDMS}
+          setLocation={setLocation}
+          setDistance={setDistance}
+        />
         <Speed speed={speed}></Speed>
-        <Joystick location={location} setLocation={setLocation} />
+        <Joystick
+          distance={distance}
+          location={location}
+          setLocationDMS={setLocationDMS}
+          setLocation={setLocation}
+          setDistance={setDistance}
+        />
       </div>
       <div className="flex items-center justify-center">
         <MapControl setMapMode={setMapMode}></MapControl>

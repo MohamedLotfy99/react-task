@@ -7,7 +7,7 @@ interface StopAlertProps {
 
 const StopAlert = ({ children, onClose }: StopAlertProps) => {
   return (
-    <div className="flex items-center justify-between bg-red-700 text-white p-4 rounded-md shadow-md">
+    <div className="flex justify-center h-100 w-150 items-center bg-red-700 text-white p-4 rounded-md shadow-md">
       <div className="flex items-center">{children}</div>
       <button
         type="button"
