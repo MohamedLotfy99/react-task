@@ -37,7 +37,7 @@ const Speed = ({ setSpeed }: SpeedProps) => {
   };
 
   return (
-    <div className="w-30 h-45 border-8 border-gray-900  rounded-2xl mt-2">
+    <div className="w-30 h-45 border-8 border-gray-900  rounded-2xl">
       <div className="flex flex-col items-center w-full h-full">
         {[0.5, 1, 2].map((speed) => (
           <button

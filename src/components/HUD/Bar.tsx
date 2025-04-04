@@ -28,7 +28,7 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
   const hours = Math.floor(elapsedTime / 1000 / 3600);
 
   return (
-    <div className="mb-10 h-20 bg-black">
+    <div className="h-20 bg-black">
       <div className="flex items-center h-20 justify-between overflow-visible">
         <div className="flex items-center">
           <img src="src/assets/atom.png" className="h-12 ml-4 w-auto"></img>
@@ -81,8 +81,8 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
           style={{ columnGap: "1%" }}
           className="z-3 mt-5 absolute top-0 left-0 w-full flex flex-row justify-around px-90 items-start text-center"
         >
-          <div className="flex flex- w-65  gap-x-10 items-center justify-center">
-            <div className="flex flex-col ml-6 gap-y-3 items-center justify-center">
+          <div className="flex w-65  gap-x-10 items-center justify-center">
+            <div className="flex flex-col ml-16 gap-y-3 items-center justify-center">
               <p className="text-gray-400 font-semibold">Distance</p>
               <p className="font-bold">{formattedDistance} m</p>
             </div>
@@ -91,11 +91,11 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
               <p className="font-bold">{`${hours}h ${minutes}m ${seconds}s`}</p>
             </div>
           </div>
-          <div className="flex flex-col w-40 gap-y-3 ml-16 items-center justify-center">
+          <div className="flex flex-col w-50 gap-y-5 ml-22 items-center justify-center">
             <p className="text-gray-400 text-2xl font-semibold">Latitude</p>
             <p className="font-bold text-2xl">{locationDMS.y}</p>
           </div>
-          <div className="flex flex-col w-90 gap-y-10 items-center justify-center">
+          <div className="flex flex-col w-85 gap-y-10 items-center justify-center">
             <p className="font-bold text-gray-400 text-3xl">STATUS</p>
             <p
               className="bg-green-600 w-40 h-20 flex items-center text-3xl font-bold justify-center"
@@ -106,7 +106,7 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
               OK
             </p>
           </div>
-          <div className="flex flex-col w-37 mr-25 gap-y-3 items-center justify-center">
+          <div className="flex flex-col w-52 mr-26 gap-y-5 items-center justify-center">
             <p className="text-gray-400 text-2xl font-semibold">Longtitude</p>
             <p className="font-bold text-2xl">{locationDMS.x}</p>
           </div>

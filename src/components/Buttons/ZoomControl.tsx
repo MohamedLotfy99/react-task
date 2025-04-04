@@ -14,17 +14,15 @@ const ZoomControl = ({ setZoomLevel }: ZoomControlProps) => {
   };
 
   return (
-    <div className="w-fit border-8 border-gray-900 mr-4 rounded-2xl mt-2">
+    <div className="w-fit border-8 border-gray-900 rounded-2xl">
       <div className="flex flex-col items-center w-fit h-full">
         <button
           onClick={() => handleZoomChange(1)}
           className="flex items-center px-6 py-2 w-full transition-all duration-200 opacity-80 bg-gray-600 text-white h-full border-b-2 border-black hover:opacity-100"
         >
-          <div className="flex flex-col items-start mr-4">
-            {/* Simple + icon made of dots */}
-            <div className="w-1 h-1 bg-yellow-500 my-0.5" />
-            <div className="w-3 h-1 bg-yellow-500 my-0.5" />
-            <div className="w-1 h-1 bg-yellow-500 my-0.5" />
+          <div className="relative w-3 h-3 mr-4">
+            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-yellow-500 transform -translate-y-1/2" />
+            <div className="absolute left-1/2 top-0 h-full w-0.5 bg-yellow-500 transform -translate-x-1/2" />
           </div>
           <span className="mr-4">Zoom In</span>
         </button>

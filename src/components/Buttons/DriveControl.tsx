@@ -37,7 +37,7 @@ const DriveControl = ({ setDriveMode }: DriveControlProps) => {
   };
 
   return (
-    <div className="w-40 h-45 border-8 border-gray-900 rounded-2xl mt-2">
+    <div className="w-40 h-45 border-8 border-gray-900 rounded-2xl ">
       <div className="flex flex-col items-center w-full h-full ">
         {["Auto", "Semi-Auto", "Manual"].map((driveMode) => (
           <button

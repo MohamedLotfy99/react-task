@@ -7,7 +7,7 @@ const Hud = ({ driveMode, light, mapMode }: HudProps) => {
   const gap = 150;
   return (
     <div
-      className=" text-center flex flex-row justify-center absolute left-1/2 transform -translate-x-1/2"
+      className=" text-center flex flex-row justify-center absolute top-60 left-1/2 transform -translate-x-1/2"
       style={{ width: "600px", gap: `${gap}px` }} // Adjust width as needed
     >
       <div className="flex flex-col items-center">

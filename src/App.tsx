@@ -66,38 +66,42 @@ const App = () => {
           </MenuAlert>
         )}
       </div>
-      <div className="mt-40">
+      <div className=" mt-20">
         <Hud driveMode={driveMode} mapMode={mapMode} light={lightMode}></Hud>
       </div>
-      <div className="ml-4 mt-10 flex justify-between">
+      <div className=" ml-12 mr-12 flex justify-between">
         <MenuButton onClick={() => setMenuAlertVis(true)}>Menu</MenuButton>
 
         <StopButton onClick={() => setStopAlertVis(true)}>STOP</StopButton>
       </div>
-      <div className="flex ml-4 space-x-4 justify-between">
+      <div className="flex ml-12  space-x-4 mt-20 mr-12 justify-between">
         <DriveControl setDriveMode={setDriveMode}></DriveControl>
         <LightControl setLightMode={setLightMode}></LightControl>
       </div>
-      <div className="flex ml-4 space-x-4 justify-between">
+      <div className="flex ml-12 mr-12 mt-20 space-x-4 justify-between">
         <SpeedControl setSpeed={setSpeed} />
         <ZoomControl setZoomLevel={setZoom}></ZoomControl>
       </div>
       <div className="flex ml-30 mr-30  justify-between items-center mt-10">
-        <Joystick
-          distance={distance}
-          location={location}
-          setLocationDMS={setLocationDMS}
-          setLocation={setLocation}
-          setDistance={setDistance}
-        />
+        <div className="ml-30 mt-20">
+          <Joystick
+            distance={distance}
+            location={location}
+            setLocationDMS={setLocationDMS}
+            setLocation={setLocation}
+            setDistance={setDistance}
+          />
+        </div>
         <Speed speed={speed}></Speed>
-        <Joystick
-          distance={distance}
-          location={location}
-          setLocationDMS={setLocationDMS}
-          setLocation={setLocation}
-          setDistance={setDistance}
-        />
+        <div className="mr-30 mt-20">
+          <Joystick
+            distance={distance}
+            location={location}
+            setLocationDMS={setLocationDMS}
+            setLocation={setLocation}
+            setDistance={setDistance}
+          />
+        </div>
       </div>
       <div className="flex items-center justify-center">
         <MapControl setMapMode={setMapMode}></MapControl>
