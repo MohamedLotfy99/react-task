@@ -24,6 +24,7 @@ interface LocationDMS {
   x: string;
   y: string;
 }
+//vercel ready
 const App = () => {
   const [speed, setSpeed] = useState(1);
   const [driveMode, setDriveMode] = useState("Manual");
