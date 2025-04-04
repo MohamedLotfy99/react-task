@@ -4,8 +4,11 @@ interface StopButtonProps {
 }
 const StopButton = ({ children, onClick }: StopButtonProps) => {
   return (
-    <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2 mr-4">
-      <button onClick={onClick} className="opacity-90 bg-red-500 text-white">
+    <div className="w-40 h-16 border-8 border-gray-900 rounded-2xl">
+      <button
+        onClick={onClick}
+        className="opacity-90 bg-red-500 text-white h-full w-full"
+      >
         {children}
       </button>
     </div>

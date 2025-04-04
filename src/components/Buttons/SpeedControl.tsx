@@ -37,16 +37,16 @@ const Speed = ({ setSpeed }: SpeedProps) => {
   };
 
   return (
-    <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2">
-      <div className="flex flex-col items-center w-fit">
+    <div className="w-30 h-45 border-8 border-gray-900  rounded-2xl mt-2">
+      <div className="flex flex-col items-center w-full h-full">
         {[0.5, 1, 2].map((speed) => (
           <button
             key={speed}
             onClick={() => handleClick(speed)}
             className={`flex items-center px-6 py-2 w-full transition-all duration-200  ${
               selectedSpeed === speed
-                ? "opacity-100 bg-gray-500 text-white"
-                : "opacity-60 bg-gray-500 text-white"
+                ? "opacity-100 bg-gray-500 text-white h-full border-b-2 border-black"
+                : "opacity-80 bg-gray-600 text-white h-full border-b-2 border-black"
             }`}
           >
             {/* Speed Text */}

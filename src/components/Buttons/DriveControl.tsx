@@ -37,16 +37,16 @@ const DriveControl = ({ setDriveMode }: DriveControlProps) => {
   };
 
   return (
-    <div className="w-fit border-8 border-gray-900 rounded-e-md mt-2">
-      <div className="flex flex-col items-center w-fit">
+    <div className="w-40 h-45 border-8 border-gray-900 rounded-2xl mt-2">
+      <div className="flex flex-col items-center w-full h-full ">
         {["Auto", "Semi-Auto", "Manual"].map((driveMode) => (
           <button
             key={driveMode}
             onClick={() => handleClick(driveMode)}
-            className={`flex items-center px-6 py-2 w-full transition-all duration-200  ${
+            className={`flex items-center  px-6 py-2 w-full transition-all duration-200  ${
               selectedDriveMode === driveMode
-                ? "opacity-100 bg-gray-500 text-white"
-                : "opacity-60 bg-gray-500 text-white"
+                ? "opacity-100 bg-gray-500 text-white h-full border-b-2 border-black"
+                : "opacity-80 bg-gray-600 text-white h-full border-b-2 border-black"
             }`}
           >
             {/* Speed Text */}

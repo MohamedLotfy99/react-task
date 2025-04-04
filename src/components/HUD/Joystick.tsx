@@ -46,7 +46,7 @@ const Joystick = ({
   const movementInterval = useRef<NodeJS.Timeout | null>(null);
   const directionRef = useRef({ x: 0, y: 0 }); // Track movement direction
 
-  const maxRadius = 45; // Joystick UI movement limit
+  const maxRadius = 55; // Joystick UI movement limit
   const movementSpeed = 0.5; // How fast location updates
 
   // Start continuous movement
@@ -67,8 +67,7 @@ const Joystick = ({
           prev.absX + Math.abs(directionRef.current.x) * movementSpeed;
         const absY =
           prev.absY + Math.abs(directionRef.current.y) * movementSpeed;
-        console.log(absX, absY);
-
+        // Update location
         setDistance(Math.sqrt(absX * absX + absY * absY)); // Update distance
         // Convert latitude (y) and longitude (x) to DMS format
         const latitudeDMS = convertToDMS(newY, true);
@@ -146,12 +145,14 @@ const Joystick = ({
       {/* Joystick Base */}
       <div
         ref={joystickRef}
-        className="relative w-32 h-32 bg-gray-700 rounded-full flex justify-center items-center"
+        className="relative w-44 h-44 bg-gray-600/60 border-6 border-gray-900 rounded-full flex justify-center items-center"
       >
         {/* Joystick Handle */}
         <div
-          className="w-16 h-16 bg-gray-400 rounded-full absolute cursor-pointer"
+          className="w-22 h-22 border-yellow-500 border-6 rounded-full absolute cursor-pointer"
           style={{
+            opacity: 1,
+            background: "radial-gradient(circle, black 30%, gray 100%)",
             transform: `translate(${position.x}px, ${position.y}px)`,
             transition: isDragging.current ? "none" : "0.2s ease-out",
           }}

@@ -12,6 +12,7 @@ import MenuButton from "./components/Buttons/MenuButton.tsx";
 import StopButton from "./components/Buttons/StopButton.tsx";
 import StopAlert from "./components/Alerts/StopAlert.tsx";
 import Hud from "./components/Hud.tsx";
+import ZoomControl from "./components/Buttons/ZoomControl.tsx";
 
 interface Location {
   x: number; // X coordinate
@@ -29,6 +30,7 @@ const App = () => {
   const [mapMode, setMapMode] = useState("Camera");
   const [lightMode, setLightMode] = useState("Laser");
   const [battery] = useState(89);
+  const [zoom, setZoom] = useState(1); // Initial zoom level
   const [location, setLocation] = useState<Location>({
     x: 0,
     y: 0,
@@ -50,6 +52,7 @@ const App = () => {
         battery={battery}
         locationDMS={locationDMS}
         distance={distance}
+        zoom={zoom}
       ></Bar>
       <div className="mt-50 z-10 absolute top-25 left-1/2 transform -translate-x-1/2">
         {stopAlertVis && (
@@ -77,6 +80,7 @@ const App = () => {
       </div>
       <div className="flex ml-4 space-x-4 justify-between">
         <SpeedControl setSpeed={setSpeed} />
+        <ZoomControl setZoomLevel={setZoom}></ZoomControl>
       </div>
       <div className="flex ml-30 mr-30  justify-between items-center mt-10">
         <Joystick

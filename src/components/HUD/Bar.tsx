@@ -4,9 +4,10 @@ interface BarProps {
   battery: number;
   // location: { x: number; y: number };
   distance: number;
+  zoom: number;
   locationDMS: { x: string; y: string };
 }
-const Bar = ({ battery, distance, locationDMS }: BarProps) => {
+const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
   // const longtitude = location.x.toFixed(2);
   // const latitude = location.y.toFixed(2);
   const formattedDistance = distance.toFixed(2);
@@ -30,7 +31,7 @@ const Bar = ({ battery, distance, locationDMS }: BarProps) => {
     <div className="mb-10 h-20 bg-black">
       <div className="flex items-center h-20 justify-between overflow-visible">
         <div className="flex items-center">
-          <img src="src/assets/atom.png" className="h-12 w-auto"></img>
+          <img src="src/assets/atom.png" className="h-12 ml-4 w-auto"></img>
           <div className=" text-white text-[24px] font-semibold ml-2">
             Oinride
           </div>
@@ -90,14 +91,14 @@ const Bar = ({ battery, distance, locationDMS }: BarProps) => {
               <p className="font-bold">{`${hours}h ${minutes}m ${seconds}s`}</p>
             </div>
           </div>
-          <div className="flex flex-col w-40 gap-y-3 ml-5 items-center justify-center">
-            <p className="text-gray-400 font-semibold">Latitude</p>
-            <p className="font-bold">{locationDMS.y}</p>
+          <div className="flex flex-col w-40 gap-y-3 ml-16 items-center justify-center">
+            <p className="text-gray-400 text-2xl font-semibold">Latitude</p>
+            <p className="font-bold text-2xl">{locationDMS.y}</p>
           </div>
           <div className="flex flex-col w-90 gap-y-10 items-center justify-center">
-            <p className="font-bold text-gray-400 text-xl">STATUS</p>
+            <p className="font-bold text-gray-400 text-3xl">STATUS</p>
             <p
-              className="bg-green-600 w-40 h-20 flex items-center text-xl font-bold justify-center"
+              className="bg-green-600 w-40 h-20 flex items-center text-3xl font-bold justify-center"
               style={{
                 clipPath: "polygon(0% 0%, 100% 0%, 90% 100%, 10% 100% )",
               }}
@@ -105,11 +106,11 @@ const Bar = ({ battery, distance, locationDMS }: BarProps) => {
               OK
             </p>
           </div>
-          <div className="flex flex-col w-40 mr-20 gap-y-3 items-center justify-center">
-            <p className="text-gray-400 font-semibold">Longtitude</p>
-            <p className="font-bold">{locationDMS.x}</p>
+          <div className="flex flex-col w-37 mr-25 gap-y-3 items-center justify-center">
+            <p className="text-gray-400 text-2xl font-semibold">Longtitude</p>
+            <p className="font-bold text-2xl">{locationDMS.x}</p>
           </div>
-          <div className="flex flex-row gap-x-9 items-center justify-center">
+          <div className="flex flex-row gap-x-16 mr-5 items-center justify-center">
             <div className="flex flex-col gap-y-3 items-center justify-center">
               <p className="text-gray-400 font-semibold">Elevation</p>
               <p className="font-bold">127 m</p>
@@ -121,7 +122,11 @@ const Bar = ({ battery, distance, locationDMS }: BarProps) => {
           </div>
         </div>
         <div className="flex items-center">
-          <div className="flex flex-col items-center mr-8">
+          <div className="flex flex-col items-center mr-10">
+            <p className="font-bold">Zoom:</p>
+            <p className="font-bold">{zoom}x</p>
+          </div>
+          <div className="flex flex-col items-center justify-center mr-10">
             <img
               style={{
                 maxWidth: 100,
@@ -131,7 +136,7 @@ const Bar = ({ battery, distance, locationDMS }: BarProps) => {
             ></img>
             <p className="text-10">{battery}%</p>
           </div>
-          <div className="mr-8">
+          <div className="mr-8 flex flex-col items-center justify-center">
             <p>{currentTime.toLocaleDateString()}</p>
             <p>{currentTime.toLocaleTimeString()}</p>
           </div>
