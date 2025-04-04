@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import atomImg from "../../assets/atom.png";
+import batteryImg from "../../assets/battery.png";
 
 interface BarProps {
   battery: number;
@@ -31,7 +33,7 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
     <div className="h-20 bg-black">
       <div className="flex items-center h-20 justify-between overflow-visible">
         <div className="flex items-center">
-          <img src="src/assets/atom.png" className="h-12 ml-4 w-auto"></img>
+          <img src={atomImg} className="h-12 ml-4 w-auto"></img>
           <div className=" text-white text-[24px] font-semibold ml-2">
             Oinride
           </div>
@@ -132,7 +134,7 @@ const Bar = ({ battery, distance, locationDMS, zoom }: BarProps) => {
                 maxWidth: 100,
                 maxHeight: 40,
               }}
-              src="src/assets/battery.png"
+              src={batteryImg}
             ></img>
             <p className="text-10">{battery}%</p>
           </div>

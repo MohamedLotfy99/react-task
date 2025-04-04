@@ -1,3 +1,7 @@
+import driveModeImg from "../assets/driveMode.png";
+import lightModeImg from "../assets/lightMode.png";
+import mapModeImg from "../assets/mapMode.png";
+
 interface HudProps {
   driveMode: string; // Drive mode (e.g., Manual, Autonomous)
   light: string; // Light mode (e.g., Light, Spot Light, Laser)
@@ -11,26 +15,17 @@ const Hud = ({ driveMode, light, mapMode }: HudProps) => {
       style={{ width: "600px", gap: `${gap}px` }} // Adjust width as needed
     >
       <div className="flex flex-col items-center">
-        <img
-          style={{ width: "100px", height: "100px" }}
-          src="src/assets/driveMode.png"
-        />
+        <img style={{ width: "100px", height: "100px" }} src={driveModeImg} />
         <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1">{driveMode}</p>
       </div>
 
       <div className="flex flex-col items-center">
-        <img
-          style={{ width: "100px", height: "100px" }}
-          src="src/assets/mapMode.png"
-        />
+        <img style={{ width: "100px", height: "100px" }} src={mapModeImg} />
         <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1 ">{mapMode}</p>
       </div>
 
       <div className="flex flex-col items-center">
-        <img
-          style={{ width: "100px", height: "100px" }}
-          src="src/assets/lightMode.png"
-        />
+        <img style={{ width: "100px", height: "100px" }} src={lightModeImg} />
         <p className="bg-gray-800 rounded-xl w-25 h-8 mt-1">{light}</p>
       </div>
     </div>
